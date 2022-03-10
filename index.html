@@ -4,48 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+  <scriptc src="tailwingConfig.js"></script>
   <title>Sunny's Screen Recorder</title>
 </head>
-<body>
-  <video width="800" height="400" controls></video>
 
-  <script>
+<body class="bg-dark">
+  
+  <center>
+    <h1>Record Your Screen</h1>
+    <video width="800" height="400" controls></video>
+  </center>
+  
 
-    // create a async function
-    const start = async () => {
-
-      // navigator api add
-      const stream = await navigator.mediaDevices.getDisplayMedia(
-        {
-          // set a object. video stream
-          video: {
-            mediaSource: "screen",
-          },
-          audio: {
-            mediaSource:"screen",
-          }
-        });
-        const data=[];
-
-      // this mediaRecorder can record our video and convert video to bynary object and store to the src.
-      const mediaRecorder= new MediaRecorder(stream);
-
-      mediaRecorder.ondataavailable = (e) => {
-        data.push(e.data);
-      };
-
-      mediaRecorder.start();
-
-      mediaRecorder.onstop = (e) => {
-        document.querySelector("video").src = URL.createObjectURL(
-          new Blob(data,{
-            type: data[0].type,
-          })
-        );
-      };
-    };
-    // call the start function here
-    start();
-  </script>
+  <script src="record.js"></script>
 </body>
 </html>
